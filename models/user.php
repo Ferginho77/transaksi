@@ -17,7 +17,7 @@ class user {
                if(mysqli_num_rows($result) > 0){
                 if(password_verify($Password, $data['Password'])){
                     $_SESSION["data"] = $data;
-                    header("Location: index.php");
+                    header("Location: ../index.php");
                 }else{
                     echo "<script>alert('Password/Username Salah');window.location='login.php'</script>";
                 }

@@ -1,6 +1,5 @@
 <?php
 include_once 'views/layouts/header.php';
-
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +18,7 @@ include_once 'views/layouts/header.php';
       Aplikasi Penghitungan Diskon
     </div>
     <div class="card-body">
-      <form method="POST">
+      <form action="controllers/diskon.php?aksi=count" method="POST">
         <label for="harga">Masukan Jumlah Harga</label>
         <input type="text" name="harga" id="harga" class="form-control m-3" placeholder="Masukan Harga">
         
@@ -29,26 +28,7 @@ include_once 'views/layouts/header.php';
         <button type="submit" class="btn btn-primary">Hitung Diskon</button>
       </form>
 
-      <?php
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-          $harga = isset($_POST['harga']) ? (float)$_POST['harga'] : 0;
-          $diskon = isset($_POST['diskon']) ? (float)$_POST['diskon'] : 0;
-
-          if ($harga <= 0 || $diskon <= 1 || $diskon > 100) {
-            echo '<div class="alert alert-danger mt-3">Harap masukkan harga yang valid dan diskon antara 1% hingga 100%.</div>';
-          } else {
-            $jumlahDiskon = ($harga * $diskon) / 100;
-            $hargaSetelahDiskon = $harga - $jumlahDiskon;
-
-            echo '<div class="alert alert-success mt-3">';
-            echo '<p>Harga Awal: Rp' . number_format($harga, 0, ',', '.') . '</p>';
-            echo '<p>Diskon: ' . $diskon . '%</p>';
-            echo '<p>Jumlah Diskon: Rp' . number_format($jumlahDiskon, 0, ',', '.') . '</p>';
-            echo '<p>Harga Setelah Diskon: Rp' . number_format($hargaSetelahDiskon, 0, ',', '.') . '</p>';
-            echo '</div>';
-          }
-        }
-      ?>
+      
     </div>
   </div>
 </div>
