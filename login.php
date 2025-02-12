@@ -24,12 +24,14 @@
                   </div>
                   <div class="flip-card__back">
                      <div class="title">Sign up</div>
-                     <form class="flip-card__form" action="" method="post">
-                        <input class="flip-card__input" placeholder="Username" type="Username">
-                        <input class="flip-card__input" placeholder="NamaLengkap" type="NamaLengkap">
-                        <input class="flip-card__input" name="password" placeholder="Password" type="password">
+                     <form class="flip-card__form" action="controllers/user.php?aksi=register" method="post">
+                        <input class="flip-card__input" name="Username" placeholder="Username" type="text">
+                        <input class="flip-card__input" name="NamaLengkap" placeholder="Nama Lengkap" type="text">
+                        <input class="flip-card__input" name="Password" placeholder="Password" type="password">
+                        <input class="flip-card__input" name="Role" type="hidden" value="Pengguna">
                         <button type="submit" name="register" class="flip-card__btn">Confirm!</button>
                      </form>
+
                   </div>
                </div>
             </label>
