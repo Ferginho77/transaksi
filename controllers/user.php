@@ -31,6 +31,9 @@ try {
         if ($_GET['aksi'] == 'login' && isset($_POST['login'])) {
             $user->login($Username, $Password);
         }
+        if($_GET['aksi'] == 'logout'){
+            $user->logout();
+        }
     }
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();

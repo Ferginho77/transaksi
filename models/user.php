@@ -56,5 +56,12 @@ class user {
 
     return $sql;
 }
+public function logout(){
+    session_destroy();
+  
+
+    header("Location: ../login.php");
+    exit;
+}
 
 }

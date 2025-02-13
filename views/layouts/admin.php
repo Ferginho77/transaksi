@@ -18,10 +18,10 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ms-auto">
           <div class="button-container">
-          <a href="../../index.php" class="fs-3">
+          <a href="../views/dashboard.php" class="fs-3">
           <i class="fas fa-home"></i>
           </a>
-          <a href="../views/cart.php" class="fs-3">
+          <a href="../views/barang.php" class="fs-3">
           <i class="fas fa-cart-plus"></i>
           </a>
 
