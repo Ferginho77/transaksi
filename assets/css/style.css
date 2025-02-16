@@ -29,7 +29,7 @@ nav {
 nav.sticky {
 padding: 5px 100px;
 background-color: #F5F7F8;
-
+color: #5579c6;
 }
 
 .navbar-nav a:hover{
@@ -78,3 +78,44 @@ font-weight: 600;
     font-size: 25px;
   }
   
+  .loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+.loading-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #5579c6;
+    animation: pulse 1s infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+.fade-out {
+  animation: fadeOut 0.5s ease-out;
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.counter-input {
+  width: 50px;
+  height: 35px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  border: none; /* Menghapus border */
+  outline: none; /* Menghapus highlight saat diklik */
+  background-color: transparent; /* Opsional: Buat background transparan */
+}

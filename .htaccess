@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# Menghapus ekstensi .php dari URL
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Mengarahkan semua permintaan ke acsess.php jika file atau folder tidak ditemukan
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ acsess.php [L]

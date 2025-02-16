@@ -9,13 +9,12 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+<div class="loading" id="loading">
+    <div class="loading-text">Loading...</div>
+</div>
+  <nav class="navbar navbar-expand-lg fixed-top text-dark p-3">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">MyApp</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <h6 class="navbar-brand fw-bolder" href="#">DISKONIN</h6>
         <div class="navbar-nav ms-auto">
           <div class="button-container">
           <a href="../../index.php" class="fs-3">
@@ -31,8 +30,18 @@
           </div>
 
         </div>
-      </div>
     </div>
 </nav>
+<script>
+    window.addEventListener('load', function() {
+        const loading = document.getElementById('loading');
+        loading.classList.add('fade-out');
+        setTimeout(() => {
+            loading.style.display = 'none';
+        }, 500);
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../assets/js/scroll.js"></script>
 </body>
 </html>
