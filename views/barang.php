@@ -1,6 +1,7 @@
 <?php
 include_once 'layouts/admin.php';
 include_once '../controllers/barang.php';
+$hargaDiskon = isset($_SESSION['harga_diskon']) ? $_SESSION['harga_diskon'] : '';
 ?>
 
 <main>
@@ -53,6 +54,7 @@ include_once '../controllers/barang.php';
                                             <button class="btn btn-success"
                                              data-bs-toggle="modal"
                                              data-bs-target="#DiskonModal"
+                                              data-harga="<?= number_format($x->Harga, 0, ',', '.') ?>"
                                             >Beri Diskon !</button>
                                         </td>
                                     </tr>
@@ -88,27 +90,30 @@ include_once '../controllers/barang.php';
                 </div>
             </div>
         </div> 
+        <!-- MODAL PENETAPAN DISKON -->
         <div class="modal fade" id="DiskonModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="ModalLabel">Form Penetapan Diskon</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                    <form action="controllers/diskon.php?aksi=count" method="POST">
-                        <label for="harga">Masukan Jumlah Harga</label>
-                        <input type="text" name="harga" id="harga" class="form-control m-3" placeholder="Masukan Harga">
-                        
-                        <label for="diskon">Terapkan Diskon %</label>
-                        <input type="text" name="diskon" id="diskon" class="form-control m-3" placeholder="Masukan Jumlah Diskon (1-100)">
-                        
-                        <button type="submit" class="btn btn-primary">Hitung Diskon</button>
-                    </form>
-                    </div>
-                </div>
-            </div>  
-        </div>              
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel">Form Penetapan Diskon</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form action="../controllers/diskon.php?aksi=count" method="POST">
+                    <label for="harga">Jumlah Harga</label>
+                    <input type="text" name="harga" id="Harga" class="form-control m-2" readonly>
+
+                    <label for="diskon">Terapkan Diskon %</label>
+                    <input type="number" name="diskon" id="diskon" class="form-control m-2" placeholder="Masukkan Diskon (1-100)">
+                    <label for="harga_final">Harga Final</label>
+                    <input type="text" name="harga_final" id="harga_final" class="form-control" value="<?= number_format($hargaDiskon, 0, ',', '.') ?>" readonly>               
+                    <button type="submit" class="btn btn-primary mt-3">Hitung Diskon</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+       
         </div>
     </div>
 </div>
@@ -131,17 +136,16 @@ include_once '../controllers/barang.php';
     });
 
     document.addEventListener('DOMContentLoaded', function () {
-        const DiskonModal = document.getElementById('DiskonModal');
-        
-        DiskonModal.addEventListener('show.bs.modal', function (event) {
-            const button = event.relatedTarget;
-            // const NamaBarang = button.getAttribute('data-nama');
-            // const Harga = button.getAttribute('data-harga');
-            // const IdBarang = button.getAttribute('data-id');
+    const DiskonModal = document.getElementById('DiskonModal');
 
-            // DiskonModal.querySelector('#NamaBarang').value = NamaBarang;
-            // DiskonModal.querySelector('#Harga').value = Harga;
-            // DiskonModal.querySelector('#IdBarang').value = IdBarang;
-        });
+    DiskonModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        const Harga = button.getAttribute('data-harga'); 
+        
+        DiskonModal.querySelector('#Harga').value = Harga;
+      
     });
+});
+
+
 </script>

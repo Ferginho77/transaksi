@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const IdUser = button.getAttribute('data-user');
 
         BeliModal.querySelector('#NamaBarang').innerText = NamaBarang;
-        BeliModal.querySelector('#Harga').innerText = 'Rp ' + Harga.toLocaleString('id-ID');
+        BeliModal.querySelector('#Harga').innerText = 'Rp ' + Harga;
         BeliModal.querySelector('#IdBarang').value = IdBarang;
         BeliModal.querySelector('#IdUser').value = IdUser;
     });

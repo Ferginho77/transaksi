@@ -12,7 +12,6 @@ include_once '../controllers/barang.php';
         <div class="card-body">
           <h5 class="card-title"><?= $x->NamaBarang ?></h5>
           <p class="card-text">Rp.<?= number_format($x->Harga, 0, ',', '.') ?></p>
-          <a href="#" class="btn btn-primary">Beli</a>
         </div>
       </div>
     <?php endforeach; ?>
