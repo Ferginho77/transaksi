@@ -1,7 +1,6 @@
 <?php
 include_once 'layouts/admin.php';
 include_once '../controllers/barang.php';
-$hargaDiskon = isset($_SESSION['harga_diskon']) ? $_SESSION['harga_diskon'] : '';
 ?>
 
 <main>
@@ -17,7 +16,9 @@ $hargaDiskon = isset($_SESSION['harga_diskon']) ? $_SESSION['harga_diskon'] : ''
                     <label for="">Nama Barang</label>
                     <input class="form-control" type="text" name="NamaBarang" placeholder="Masukan Nama Barang">
                     <label for="">Harga</label>
-                   <input type="text" class="form-control" name="Harga" placeholder="Rp.000">
+                    <input type="text" class="form-control" name="Harga" placeholder="Rp.000">
+                    <label for="">Beri Diskon</label>
+                    <input type="text" class="form-control" name="TotalDiskon" placeholder="Masukan Diskon Antara 1-100%">
                    <button type="submit" name="tambah" class="btn btn-primary mt-2">Kirim</button>
                 </form>
                </div> 
@@ -29,40 +30,67 @@ $hargaDiskon = isset($_SESSION['harga_diskon']) ? $_SESSION['harga_diskon'] : ''
                     <h3>Data Barang</h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-hover"> 
-                        <tr>
-                            <th>Nama Barang</th>
-                            <th>Harga Barang</th>
-                            <th>Aksi</th>
-                        </tr>
-                        <?php if (!empty($barangs)) { ?>
-                            <tbody>
-                                <?php foreach ($barangs as $x) : ?>
-                                    <tr>
-                                        <td><?= $x->NamaBarang ?></td>
-                                        <td>Rp.<?= number_format($x->Harga, 0, ',', '.') ?></td>
-                                        <td>
-                                            <button class="btn btn-info"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#EditModal"
-                                                    data-id="<?= $x->IdBarang ?>"
-                                                    data-nama="<?= $x->NamaBarang ?>"
-                                                    data-harga="<?= $x->Harga ?>">
-                                                Edit
-                                            </button>
-                                            <a onclick="return confirm('ente yakin?')" href="../controllers/barang.php?IdBarang=<?= $x->IdBarang ?>&aksi=hapus" class="btn btn-danger">Hapus</a>
-                                            <button class="btn btn-success"
-                                             data-bs-toggle="modal"
-                                             data-bs-target="#DiskonModal"
-                                              data-harga="<?= number_format($x->Harga, 0, ',', '.') ?>"
-                                            >Beri Diskon !</button>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        <?php } ?>
-                    </table>
-                  
+                <table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Nama Barang</th>
+            <th>Harga Barang</th>
+            <th>Diskon Barang</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php if (!empty($barangs)) : ?>
+        <?php foreach ($barangs as $x) : ?>
+            <?php
+            $harga = $x->Harga;
+            $diskon = isset($x->TotalDiskon) ? $x->TotalDiskon : 0;
+            $jumlahDiskon = ($diskon > 0) ? ($harga * $diskon) / 100 : 0;
+            $hargaSetelahDiskon = $harga - $jumlahDiskon;
+            ?>
+            <tr>
+                <td><?= htmlspecialchars($x->NamaBarang) ?></td>
+                <td>
+                    <?php if ($diskon > 0) : ?>
+                        <span style="text-decoration: line-through; color: red;">
+                            Rp.<?= number_format($harga, 0, ',', '.') ?>
+                        </span>
+                    <?php else : ?>
+                        Rp.<?= number_format($harga, 0, ',', '.') ?>
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <?php if ($diskon > 0) : ?>
+                        <span>Rp.<?= number_format($hargaSetelahDiskon, 0, ',', '.') ?></span>
+                    <?php else : ?>
+                        <span style="color: gray;">Tidak ada diskon</span>
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <button class="btn btn-info" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#EditModal" 
+                            data-id="<?= $x->IdBarang ?>" 
+                            data-nama="<?= htmlspecialchars($x->NamaBarang) ?>" 
+                            data-harga="<?= $x->Harga ?>"
+                            data-diskon="<?= $x->TotalDiskon ?>">
+                        Edit
+                    </button>
+                    <a onclick="return confirm('Anda yakin ingin menghapus barang ini?')" 
+                       href="../controllers/barang.php?IdBarang=<?= $x->IdBarang ?>&aksi=hapus" 
+                       class="btn btn-danger">
+                        Hapus
+                    </a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</tbody>
+
+
+
+</table>
+
                 </div>
             </div>
               <!-- MODAL EDIT -->
@@ -84,35 +112,16 @@ $hargaDiskon = isset($_SESSION['harga_diskon']) ? $_SESSION['harga_diskon'] : ''
                                 <label for="Harga" class="form-label">Harga</label>
                                 <input type="text" class="form-control" id="Harga" name="Harga" placeholder="Rp. 000">
                             </div>
+                            <div class="mb-3">
+                            <label for="">Beri Diskon</label>
+                            <input type="text" class="form-control" id="Diskon" name="TotalDiskon" placeholder="Masukan Diskon Antara 1-100%">
+                            </div>
                             <button type="submit" name="edit" class="btn btn-primary">Kirim</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div> 
-        <!-- MODAL PENETAPAN DISKON -->
-        <div class="modal fade" id="DiskonModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="ModalLabel">Form Penetapan Diskon</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            <form action="../controllers/diskon.php?aksi=count" method="POST">
-                    <label for="harga">Jumlah Harga</label>
-                    <input type="text" name="harga" id="Harga" class="form-control m-2" readonly>
-
-                    <label for="diskon">Terapkan Diskon %</label>
-                    <input type="number" name="diskon" id="diskon" class="form-control m-2" placeholder="Masukkan Diskon (1-100)">
-                    <label for="harga_final">Harga Final</label>
-                    <input type="text" name="harga_final" id="harga_final" class="form-control" value="<?= number_format($hargaDiskon, 0, ',', '.') ?>" readonly>               
-                    <button type="submit" class="btn btn-primary mt-3">Hitung Diskon</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
        
         </div>
     </div>
@@ -127,25 +136,14 @@ $hargaDiskon = isset($_SESSION['harga_diskon']) ? $_SESSION['harga_diskon'] : ''
             const button = event.relatedTarget;
             const NamaBarang = button.getAttribute('data-nama');
             const Harga = button.getAttribute('data-harga');
+            const Diskon = button.getAttribute('data-diskon');
             const IdBarang = button.getAttribute('data-id');
 
             EditModal.querySelector('#NamaBarang').value = NamaBarang;
             EditModal.querySelector('#Harga').value = Harga;
+            EditModal.querySelector('#Diskon').value = Diskon;
             EditModal.querySelector('#IdBarang').value = IdBarang;
         });
     });
-
-    document.addEventListener('DOMContentLoaded', function () {
-    const DiskonModal = document.getElementById('DiskonModal');
-
-    DiskonModal.addEventListener('show.bs.modal', function (event) {
-        const button = event.relatedTarget;
-        const Harga = button.getAttribute('data-harga'); 
-        
-        DiskonModal.querySelector('#Harga').value = Harga;
-      
-    });
-});
-
 
 </script>

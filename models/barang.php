@@ -5,12 +5,16 @@ include_once __DIR__ . '/../controllers/conn.php';
 
 
 class Barang {
-    public function TambahBarang($NamaBarang, $Harga){
+    public function TambahBarang($NamaBarang, $Harga, $TotalDiskon){
         $conn = new database();
-        $sql = "INSERT INTO barang VALUES (NULL, '$NamaBarang', '$Harga')";
-
+        
+        if ($TotalDiskon < 1 || $TotalDiskon > 100) {
+            echo "<script>alert('tolong masukan diskon antara 1 - 100% ');window.location='../views/barang.php'</script>";
+            exit();
+        }
+        $sql = "INSERT INTO barang VALUES (NULL, '$NamaBarang', '$Harga', '$TotalDiskon')";
         $result = mysqli_query($conn->koneksi, $sql);
-
+    
         if($result){
             header("Location: ../views/barang.php");
         }else{
@@ -35,9 +39,13 @@ class Barang {
 		return $result;
     }
 
-    public function Edit($id, $NamaBarang, $Harga){
+    public function Edit($id, $NamaBarang, $Harga, $TotalDiskon){
+        if ($TotalDiskon < 1 || $TotalDiskon > 100) {
+            echo "<script>alert('tolong masukan diskon antara 1 - 100% ');window.location='../views/barang.php'</script>";
+            exit();
+        }
         $conn = new database();
-        $sql = "UPDATE barang SET NamaBarang='$NamaBarang', Harga='$Harga' WHERE IdBarang = '$id'";
+        $sql = "UPDATE barang SET NamaBarang='$NamaBarang', Harga='$Harga', TotalDiskon='$TotalDiskon' WHERE IdBarang = '$id'";
         $result = mysqli_query($conn->koneksi, $sql);
     
         if ($result) {

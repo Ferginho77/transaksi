@@ -10,7 +10,8 @@ try {
         if ($_GET['aksi'] == 'tambah' && isset($_POST['tambah'])) {
             $NamaBarang = $_POST['NamaBarang'];
             $Harga = $_POST['Harga'];
-            $barang->TambahBarang($NamaBarang, $Harga);
+            $TotalDiskon = $_POST['TotalDiskon'];
+            $barang->TambahBarang($NamaBarang, $Harga, $TotalDiskon);
         } elseif ($_GET['aksi'] == 'hapus') {
             $id = $_GET['IdBarang'];
             $hapus = $barang->Hapus($id);
@@ -23,8 +24,8 @@ try {
             $id = $_POST['IdBarang']; 
             $NamaBarang = $_POST['NamaBarang'];
             $Harga = $_POST['Harga'];
-            
-             $barang->Edit($id, $NamaBarang, $Harga);
+            $TotalDiskon = $_POST['TotalDiskon'];
+             $barang->Edit($id, $NamaBarang, $Harga, $TotalDiskon);
         }
     } else {
         $totals = $barang->HitungBarang();

@@ -13,12 +13,6 @@ class Diskon {
             $jumlahDiskon = ($harga * $diskon) / 100;
             $hargaSetelahDiskon = $harga - $jumlahDiskon;
 
-            echo '<div class="alert alert-success mt-3">';
-            echo '<p>Harga Awal: Rp' . number_format($harga, 0, ',', '.') . '</p>';
-            echo '<p>Diskon: ' . $diskon . '%</p>';
-            echo '<p>Jumlah Diskon: Rp' . number_format($jumlahDiskon, 0, ',', '.') . '</p>';
-            echo '<p>Harga Setelah Diskon: Rp' . number_format($hargaSetelahDiskon, 0, ',', '.') . '</p>';
-            echo '</div>';
           }
         }
   }
