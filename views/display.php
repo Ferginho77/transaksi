@@ -17,7 +17,7 @@ include_once '../controllers/barang.php';
             <div class="card-body">
                 <h5 class="card-title"><?= htmlspecialchars($x->NamaBarang) ?></h5>
                 <p>
-                    <?php if ($diskon > 0) : ?>
+                    <?php if ($diskon > 0) : ?> 
                         <span style="text-decoration: line-through; color: red;">
                             Rp.<?= number_format($harga, 0, ',', '.') ?>
                         </span>
