@@ -7,20 +7,26 @@ include_once __DIR__ . '/../controllers/conn.php';
 class Barang {
     public function TambahBarang($NamaBarang, $Harga, $TotalDiskon){
         $conn = new database();
-        
-        if ($TotalDiskon < 1 || $TotalDiskon > 100) {
-            echo "<script>alert('tolong masukan diskon antara 1 - 100% ');window.location='../views/barang.php'</script>";
-            exit();
+        if ($TotalDiskon === "" || $TotalDiskon === null) {
+            $TotalDiskon = "NULL";
+        } else {
+            if ($TotalDiskon < 1 || $TotalDiskon > 100) {
+                echo "<script>alert('Tolong masukkan diskon antara 1 - 100%');window.location='../views/barang.php'</script>";
+                exit();
+            }
+            $TotalDiskon = "'$TotalDiskon'"; // Bungkus dengan tanda kutip agar tetap valid dalam SQL
         }
-        $sql = "INSERT INTO barang VALUES (NULL, '$NamaBarang', '$Harga', '$TotalDiskon')";
+    
+        $sql = "INSERT INTO barang VALUES (NULL, '$NamaBarang', '$Harga', $TotalDiskon)";
         $result = mysqli_query($conn->koneksi, $sql);
     
-        if($result){
+        if ($result) {
             header("Location: ../views/barang.php");
-        }else{
-            echo "<script>alert('Data Gagal Di Edit');window.location='../views/barang.php'</script>";
+        } else {
+            echo "<script>alert('Data Gagal Ditambahkan');window.location='../views/barang.php'</script>";
         }
     }
+    
 
     public function TampilData(){
         $conn = new database();

@@ -19,7 +19,7 @@ class Transaksi{
     public function TampilTransaksi($UserId){
         $conn = new database();
         
-        $query = "SELECT transaksi.*, user.Username, barang.NamaBarang, barang.Harga 
+        $query = "SELECT transaksi.*, user.Username, barang.NamaBarang, barang.Harga, barang.TotalDiskon
                   FROM transaksi 
                   INNER JOIN user ON transaksi.IdUser = user.IdUser 
                   INNER JOIN barang ON transaksi.IdBarang = barang.IdBarang 
