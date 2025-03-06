@@ -1,3 +1,7 @@
+<?php
+include_once __DIR__ . "/../../controllers/conn.php";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,21 +18,25 @@
 </div>
   <nav class="navbar navbar-expand-lg fixed-top text-dark p-3">
     <div class="container-fluid">
-    <h6 class="navbar-brand fw-bolder" href="#">DISKONIN</h6>
+    <a class="navbar-brand fw-bolder" href="home">Dunia Jersey</a>
         <div class="navbar-nav ms-auto">
+        <?php if (!isset($_SESSION['data'])): ?>
+    <!-- Jika user belum login, tampilkan tombol Login -->
+    <a href="../../login" class="btn btn-primary">Login</a>
+<?php else: ?>
           <div class="button-container">
-          <a href="../../index.php" class="fs-3">
-          <i class="fas fa-home"></i>
-          </a>
-          <a href="../views/cart.php" class="fs-3">
-          <i class="fas fa-cart-plus"></i>
-          </a>
+            <a href="../../home" class="fs-3 m-3">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="../views/cart" class="fs-3">
+            <i class="fas fa-cart-plus"></i>
+            </a>
 
-          <a href="../../controllers/user.php?aksi=logout" onclick="return confirm('Yakin ingin keluar dari aplikasi?')" class="fs-3">
-          <i class="fas fa-sign-out-alt"></i>
-          </a>
+            <a href="../../controllers/user.php?aksi=logout" onclick="return confirm('Yakin ingin keluar dari aplikasi?')" class="fs-3">
+            <i class="fas fa-sign-out-alt"></i>
+            </a>
           </div>
-
+    <?php endif; ?>
         </div>
     </div>
 </nav>

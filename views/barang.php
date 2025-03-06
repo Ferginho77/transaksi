@@ -7,16 +7,18 @@ include_once '../controllers/barang.php';
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-            <div class="card mt-3">
+            <div class="card mt-3 border border-dark">
                 <div class="card-header">
                     <h3>Tambah Barang</h3>
                 </div>
                <div class="card-body">
-                <form action="../controllers/barang.php?aksi=tambah" method="post">
+                <form action="../controllers/barang.php?aksi=tambah" method="post" enctype="multipart/form-data">
                     <label for="">Nama Barang</label>
                     <input class="form-control" type="text" name="NamaBarang" placeholder="Masukan Nama Barang">
                     <label for="">Harga</label>
                     <input type="text" class="form-control" name="Harga" placeholder="Rp.000">
+                    <label for="">Foto Barang</label>
+                    <input type="file" name="FotoBarang" class="form-control">
                     <label for="">Beri Diskon</label>
                     <input type="text" class="form-control" name="TotalDiskon" placeholder="Masukan Diskon Antara 1-100%">
                    <button type="submit" name="tambah" class="btn btn-primary mt-2">Kirim</button>
@@ -25,7 +27,7 @@ include_once '../controllers/barang.php';
             </div>
         </div>
         <div class="col-md-8">
-            <div class="card mt-3">
+            <div class="card mt-3 border border-dark">
                 <div class="card-header">
                     <h3>Data Barang</h3>
                 </div>

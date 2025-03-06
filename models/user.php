@@ -8,7 +8,7 @@ class user {
     
         // Cek apakah Username dan Password kosong
         if (empty($Username) || empty($Password)) {
-            echo "<script>alert('Username dan Password harus diisi.');window.location='../login.php'</script>";
+            echo "<script>alert('Username dan Password harus diisi.');window.location='../login'</script>";
             exit();
         }
     
@@ -25,19 +25,19 @@ class user {
     
                     // Cek role user
                     if ($data['Role'] == 'Admin') {
-                        header("Location: ../views/dashboard.php");
+                        header("Location: ../views/dashboard");
                     } else {
-                        header("Location: ../index.php");
+                        header("Location: ../home");
                     }
                     exit();
                 } else {
-                    echo "<script>alert('Password salah');window.location='../login.php'</script>";
+                    echo "<script>alert('Password salah');window.location='../login'</script>";
                 }
             } else {
-                echo "<script>alert('Username tidak ditemukan');window.location='../login.php'</script>";
+                echo "<script>alert('Username tidak ditemukan');window.location='../login'</script>";
             }
         } else {
-            echo "<script>alert('Terjadi kesalahan sistem');window.location='../login.php'</script>";
+            echo "<script>alert('Terjadi kesalahan sistem');window.location='../login'</script>";
         }
     }
     
@@ -48,7 +48,7 @@ class user {
     if (mysqli_num_rows($cek) > 0) {
         echo "<script>
                 alert('Username sudah terdaftar');
-                window.location.href = '../login.php';
+                window.location.href = '../login';
               </script>";
     } 
     
@@ -60,7 +60,7 @@ public function logout(){
     session_destroy();
   
 
-    header("Location: ../login.php");
+    header("Location: ../login");
     exit;
 }
 

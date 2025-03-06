@@ -14,13 +14,14 @@
 </div>
   <nav class="navbar navbar-expand-lg fixed-top text-dark p-3">
     <div class="container-fluid">
-    <h6 class="navbar-brand fw-bolder" href="#">DISKONIN</h6>
+    <h6 class="navbar-brand fw-bolder" href="#">Dunia Jersey</h6>
         <div class="navbar-nav ms-auto">
+            
           <div class="button-container">
-          <a href="../views/dashboard.php" class="fs-3">
+          <a href="../views/dashboard" class="fs-3">
           <i class="fas fa-home"></i>
           </a>
-          <a href="../views/barang.php" class="fs-3">
+          <a href="../views/barang" class="fs-3">
           <i class="fas fa-cart-plus"></i>
           </a>
 

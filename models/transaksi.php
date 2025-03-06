@@ -10,16 +10,16 @@ class Transaksi{
         $result = mysqli_query($conn->koneksi, $sql);
 
         if($result){
-            echo "<script>alert('Transaksi Berhasil Silahkan Cek Cart Anda');window.location='../index.php'</script>";
+            echo "<script>alert('Transaksi Berhasil Silahkan Cek Cart Anda');window.location='../home'</script>";
         }else{
-            echo "<script>alert('Data Gagal Di Edit');window.location='../index.php'</script>";
+            echo "<script>alert('Data Gagal Di Edit');window.location='../home'</script>";
         }
     }
 
     public function TampilTransaksi($UserId){
         $conn = new database();
         
-        $query = "SELECT transaksi.*, user.Username, barang.NamaBarang, barang.Harga, barang.TotalDiskon
+        $query = "SELECT transaksi.*, user.Username, barang.NamaBarang, barang.Harga, barang.TotalDiskon, barang.FotoBarang
                   FROM transaksi 
                   INNER JOIN user ON transaksi.IdUser = user.IdUser 
                   INNER JOIN barang ON transaksi.IdBarang = barang.IdBarang 

@@ -10,15 +10,29 @@ try {
         if ($_GET['aksi'] == 'tambah' && isset($_POST['tambah'])) {
             $NamaBarang = $_POST['NamaBarang'];
             $Harga = $_POST['Harga'];
+            $FotoBarang = $_FILES['FotoBarang']['name'];
             $TotalDiskon = $_POST['TotalDiskon'];
-            $barang->TambahBarang($NamaBarang, $Harga, $TotalDiskon);
+
+                
+            $can = array('jpg', 'png', 'jpeg');
+            $x = explode('.', $FotoBarang);
+            $ekstensi = strtolower(end($x));
+            $tmp = $_FILES['FotoBarang']['tmp_name'];
+
+            if (in_array($ekstensi, $can) == true) {
+                move_uploaded_file($tmp, '../assets/img/' . $FotoBarang);
+                $barang->TambahBarang($NamaBarang, $Harga, $FotoBarang, $TotalDiskon);
+            }else{
+                echo "<script>alert('Data Gagal DI UP');window.location='../views/barang'</script>";
+            }
+            
         } elseif ($_GET['aksi'] == 'hapus') {
             $id = $_GET['IdBarang'];
             $hapus = $barang->Hapus($id);
             if ($hapus) {
-                header("Location: ../views/barang.php");
+                header("Location: ../views/barang");
             } else {
-                echo "<script>alert('Data Gagal Dihapus');window.location='../views/barang.php'</script>";
+                echo "<script>alert('Data Gagal Dihapus');window.location='../views/barang'</script>";
             }
         } elseif ($_GET['aksi'] == 'edit' && isset($_POST['edit'])) {
             $id = $_POST['IdBarang']; 

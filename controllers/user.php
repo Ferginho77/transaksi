@@ -17,12 +17,12 @@ try {
             $result = $user->register($Username, $Password, $NamaLengkap, $Role);
         
             if ($result) {
-                header("Location: ../login.php");
+                header("Location: ../login");
                 exit;
             } else {
                 echo "<script>
                         alert('Registrasi gagal, coba lagi');
-                        window.location.href = '../login.php';
+                        window.location.href = '../login';
                       </script>";
             }
         }

@@ -6,8 +6,7 @@
 }
 
 body {
-  background: rgb(234,234,244);
-  background: linear-gradient(90deg, rgba(234,234,244,1) 4%, rgb(117, 170, 255) 100%);
+  background: #fff;
 }
 
 main {
@@ -29,12 +28,12 @@ nav {
 nav.sticky {
 padding: 5px 100px;
 background-color: #F5F7F8;
-color: #5579c6;
+color: #04070c;
 }
 
 .navbar-nav a:hover{
  text-decoration: none;
-  background-color: #5579c6;
+  background-color: #04070c;
   color: white;
   border-radius: 20px;
   transition: 0.6s;
@@ -44,7 +43,7 @@ color: #5579c6;
  display: flex;
  margin: 10px;
  padding: 6px 15px;
-color: #5579c6;
+color: #04070c;
 font-weight: 600;
 }
 

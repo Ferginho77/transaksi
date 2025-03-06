@@ -5,25 +5,25 @@ include_once __DIR__ . '/../controllers/conn.php';
 
 
 class Barang {
-    public function TambahBarang($NamaBarang, $Harga, $TotalDiskon){
+    public function TambahBarang($NamaBarang, $Harga, $FotoBarang, $TotalDiskon){
         $conn = new database();
         if ($TotalDiskon === "" || $TotalDiskon === null) {
             $TotalDiskon = "NULL";
         } else {
             if ($TotalDiskon < 1 || $TotalDiskon > 100) {
-                echo "<script>alert('Tolong masukkan diskon antara 1 - 100%');window.location='../views/barang.php'</script>";
+                echo "<script>alert('Tolong masukkan diskon antara 1 - 100%');window.location='../views/barang'</script>";
                 exit();
             }
             $TotalDiskon = "'$TotalDiskon'"; // Bungkus dengan tanda kutip agar tetap valid dalam SQL
         }
     
-        $sql = "INSERT INTO barang VALUES (NULL, '$NamaBarang', '$Harga', $TotalDiskon)";
+        $sql = "INSERT INTO barang VALUES (NULL, '$NamaBarang', '$Harga', '$FotoBarang', $TotalDiskon)";
         $result = mysqli_query($conn->koneksi, $sql);
     
         if ($result) {
-            header("Location: ../views/barang.php");
+            header("Location: ../views/barang");
         } else {
-            echo "<script>alert('Data Gagal Ditambahkan');window.location='../views/barang.php'</script>";
+            echo "<script>alert('Data Gagal Ditambahkan');window.location='../views/barang'</script>";
         }
     }
     
@@ -46,8 +46,8 @@ class Barang {
     }
 
     public function Edit($id, $NamaBarang, $Harga, $TotalDiskon){
-        if ($TotalDiskon < 1 || $TotalDiskon > 100) {
-            echo "<script>alert('tolong masukan diskon antara 1 - 100% ');window.location='../views/barang.php'</script>";
+        if ($TotalDiskon < 0 || $TotalDiskon > 100) {
+            echo "<script>alert('tolong masukan diskon antara 1 - 100% ');window.location='../views/barang'</script>";
             exit();
         }
         $conn = new database();
@@ -55,9 +55,9 @@ class Barang {
         $result = mysqli_query($conn->koneksi, $sql);
     
         if ($result) {
-            header("Location: ../views/barang.php");
+            header("Location: ../views/barang");
         } else {
-            echo "<script>alert('Data Gagal Di Edit');window.location='../views/barang.php'</script>";
+            echo "<script>alert('Data Gagal Di Edit');window.location='../views/barang'</script>";
         }
     }
 
