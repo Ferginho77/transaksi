@@ -116,7 +116,7 @@ include_once '../controllers/barang.php';
                             </div>
                             <div class="mb-3">
                             <label for="">Beri Diskon</label>
-                            <input type="text" class="form-control" id="Diskon" name="TotalDiskon" placeholder="Masukan Diskon Antara 1-100%">
+                             <input type="number" class="form-control" id="Diskon" name="TotalDiskon" placeholder="Kosongkan untuk hapus diskon" min="0" max="100">
                             </div>
                             <button type="submit" name="edit" class="btn btn-primary">Kirim</button>
                         </form>
